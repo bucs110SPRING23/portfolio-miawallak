@@ -1,64 +1,56 @@
-import turtle #1. import modules
-import random
 
-#Part A
-window = turtle.Screen() # 2.  Create a screen
-window.bgcolor('lightblue')
-
-michelangelo = turtle.Turtle() # 3.  Create two turtles
-leonardo = turtle.Turtle()
-michelangelo.color('orange')
-leonardo.color('blue')
-michelangelo.shape('turtle')
-leonardo.shape('turtle')
-
-michelangelo.up() # 4. Pick up the pen so we don’t get lines
-leonardo.up()
-michelangelo.goto(-100,20)
-leonardo.goto(-100,-20)
-
-## 5. Your PART A code goes here
-michelangelo.forward(random.randrange(1, 100))
-leonardo.forward(random.randrange(1,100))
-michelangelo.goto(-100,20)
-leonardo.goto(-100,-20)
-
-
-
-
-for i in range(10):
-    michelangelo.forward(random.randrange(1,10))
-    leonardo.forward(random.randrange(1,10))
-
-michelangelo.goto(-100,20)
-leonardo.goto(-100,-20)
-window.exitonclick()
-
-
-# PART B - complete part B here
 import pygame
+import random
 import math
-
 pygame.init()
-window = pygame.display.set_mode((500, 500))
 
-points = []
-sides = [3, 4, 6, 20, 100, 360]
-side_length = 100
-xpos = 250
-ypos = 250
+screen_size = pygame.display.get_window_size()
+screen = pygame.display.set_mode(screen_size)
 
-for num_sides in sides:
-    points = []
-    window.fill("black")
-    for i in range(num_sides):
-        angle = 360/num_sides
-        radians = math.radians(angle * i)
-        x = xpos + side_length * math.cos(radians)
-        y = ypos + side_length * math.sin(radians)
-        points.append((x,y))
-    pygame.draw.polygon(window, (0, 0, 255), points)
+background_color = (255, 255, 255)
+board_color = (0, 0, 0)
+miss_color = (255, 0, 0)
+hit_color = (0, 255, 0)
+
+board_radius = min(screen_size) // 2
+board_center = (screen_size[0] // 2, screen_size[1] // 2)
+running = True
+while running:
+ 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+  
+    screen.fill(background_color)
+
+
+    pygame.draw.circle(screen, board_color, board_center, board_radius, 10)  # outer circle
+    pygame.draw.circle(screen, background_color, board_center, board_radius - 10)  # inner circle
+    for i in range(0, 360, 18):
+        start_pos = (board_center[0] + int(0.8 * board_radius * math.cos(math.radians(i))),
+                     board_center[1] + int(0.8 * board_radius * math.sin(math.radians(i))))
+        end_pos = (board_center[0] + int(board_radius * math.cos(math.radians(i))),
+                   board_center[1] + int(board_radius * math.sin(math.radians(i))))
+        pygame.draw.line(screen, board_color, start_pos, end_pos, 10)  # radial lines
+
+
+    for _ in range(10):
+    
+        dart_x = random.randrange(screen_size[0])
+        dart_y = random.randrange(screen_size[1])
+
+   
+        distance_from_center = math.hypot(dart_x - board_center[0], dart_y - board_center[1])
+        if distance_from_center <= board_radius - 10:
+        
+            pygame.draw.circle(screen, hit_color, (dart_x, dart_y), 2)
+        else:
+           
+            pygame.draw.circle(screen, miss_color, (dart_x, dart_y), 2)
+
+ 
     pygame.display.flip()
-    pygame.time.wait(3000)
+
 
 pygame.quit()

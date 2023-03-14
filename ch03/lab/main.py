@@ -21,36 +21,35 @@ screen_width = screen_size_variable[0];
 screen_height = screen_size_variable[1];
 board_center = (screen_width/2, screen_height/2 );
 board_radius = screen_width/2;
-running = True;
-while running:
- 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+"""running = True;
+while running:"""
+
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        running = False
 
   
-    screen.fill(background_color)
+screen.fill(background_color)
 
 
-    pygame.draw.circle(screen, board_color, board_center, board_radius)  
-    pygame.draw.line(screen, line_color, (screen_width / 2, 0), (screen_width / 2, 1000), 5)
-    pygame.draw.line(screen, line_color, (0, screen_height / 2), (1000, screen_height / 2), 5)
+pygame.draw.circle(screen, board_color, board_center, board_radius)  
+pygame.draw.line(screen, line_color, (screen_width / 2, 0), (screen_width / 2, 1000), 5)
+pygame.draw.line(screen, line_color, (0, screen_height / 2), (1000, screen_height / 2), 5)
 
-    for i in range(10):
-        x1 = random.randrange(0, screen_width)
-        x2 = screen_width/2
-        y1 = random.randrange(0, screen_height)
-        y2 = screen_height/2
-        distance_from_center = math.hypot(x1-x2, y1-y2) 
-        is_in_circle = distance_from_center <= screen_width / 2
+for i in range(10):
+    x1 = random.randrange(0, screen_width)
+    x2 = screen_width/2
+    y1 = random.randrange(0, screen_height)
+    y2 = screen_height/2
+    distance_from_center = math.hypot(x1-x2, y1-y2) 
+    is_in_circle = distance_from_center <= screen_width / 2
 
-        if is_in_circle:
-            pygame.draw.circle(screen, hit_color, (x1, y1), 5)
-        else:
-            pygame.draw.circle(screen, miss_color, (x1, y1), 5) 
+    if is_in_circle:
+        pygame.draw.circle(screen, hit_color, (x1, y1), 5)
+    else:
+        pygame.draw.circle(screen, miss_color, (x1, y1), 5) 
          
  
-    pygame.display.flip()
+pygame.display.flip()
 
-
-pygame.quit() 
+pygame.time.delay(5000);

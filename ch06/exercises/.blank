@@ -1,0 +1,13 @@
+
+
+
+
+
+def main():
+    open("ideas.txt")
+    idea = input("Enter an idea: ")
+    ideas = []
+    ideas.append(idea)
+    print(ideas)
+
+main()

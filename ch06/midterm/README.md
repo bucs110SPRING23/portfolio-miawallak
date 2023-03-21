@@ -1,9 +1,9 @@
 # CS110 Midterm Exam
 
-## SHORT DESCRIPTION *(1 or 2 sentences describing your program)*
+## SHORT DESCRIPTION: This is code that is using turtle to draw a small family home.
 
-## KNOWN BUGS AND INCOMPLETE PARTS *(list any known bugs or non-working parts)*
+## KNOWN BUGS AND INCOMPLETE PARTS: None
 
-## REFERENCES *(any resources you use outside of class materials)*
+## REFERENCES: Turtle help page 
 
-## MISCELLANEOUS COMMENTS *(anything else you would like the grader to know)*
+## MISCELLANEOUS COMMENTS: This is a typical colonial-style home! 

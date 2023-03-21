@@ -2,6 +2,8 @@ import turtle
 
 t = turtle.Turtle()
 
+special_angle = 45
+
 # Draw the main house structure
 def base(length):
     t.begin_fill()
@@ -22,7 +24,7 @@ def roof(length):
     t.pendown()
     t.begin_fill()
     t.color("green")
-    t.right(45)
+    t.right(special_angle)
     t.forward(107)
     t.right(90)
     t.forward(107)
@@ -35,7 +37,7 @@ def door(length):
     t.pendown()
     t.begin_fill()
     t.color("Red", "white")
-    t.right(45)
+    t.right(special_angle)
     t.forward(60)
     t.right(90)
     t.forward(40)

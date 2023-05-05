@@ -18,21 +18,25 @@ def threenp1range(upper_limit):
         val = threenp1(i)
         objs_in_sequence[i] = val
     print(objs_in_sequence)
+    return objs_in_sequence
 
 #Part B
 display = pygame.display.set_mode((800, 600))
 pygame.init()
 def graph_coordinates(threenplus1_iters_dict):
+    display_info = pygame.display.Info()
+    screen_width = display_info.current_w
+    screen_height = display_info.current_h
+    
     coordinates = list(threenplus1_iters_dict.items())
-    pygame.draw.lines(display, "Purple" , False, coordinates )
-    new_display = pygame.transform.flip(display, False, True)
-    font = pygame.font.Font(None, 16)
-    msg = font.render("Hello", False, "black")
-    display.blit(msg, (10, 10))
-    width, height = new_display.get_size()
-    new_display = pygame.transform.scale(new_display, (width * 5, height *5))
-    new_display.blit(new_display, (0, 0)) 
+    max_x = max(coordinates, key=lambda x: x[0])[0]
+    max_y = max(coordinates, key=lambda x: x[1])[1]
+    normalized_coords = [(x / max_x, y / max_y) for x, y in coordinates]
+    pixel_coords = [(int(x * screen_width), int(y * screen_height)) for x, y in normalized_coords]
+    
+    pygame.draw.lines(display, "Purple", False, pixel_coords)
     pygame.display.flip()
+
 
 
 def main():
@@ -51,3 +55,4 @@ def main():
     pygame.quit()
 
 main()
+ 
